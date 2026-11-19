@@ -4,12 +4,12 @@
    CSS pur (Authentik n'accepte pas de JS) : balayage, vignette, scintillement.
    Ajouté APRÈS base.css (ordre du portail, mobile) : les règles ci-dessous l'emportent.
    ========================================================================== */
-@font-face { font-family: "Eliot Mono"; font-weight: 400; font-display: swap; src: url("__FONT400__") format("woff2"); }
-@font-face { font-family: "Eliot Mono"; font-weight: 700; font-display: swap; src: url("__FONT700__") format("woff2"); }
+@font-face { font-family: "Elliot Mono"; font-weight: 400; font-display: swap; src: url("__FONT400__") format("woff2"); }
+@font-face { font-family: "Elliot Mono"; font-weight: 700; font-display: swap; src: url("__FONT700__") format("woff2"); }
 
 :root, :host, html[data-theme], body {
   --el-red: #ff1e3c; --el-red-dim: #8a0a1f; --el-green: #3dff8b; --el-cyan: #5ee7ff; --el-amber: #ffb020;
-  --el-mono: "Eliot Mono", "JetBrains Mono", "DejaVu Sans Mono", ui-monospace, monospace;
+  --el-mono: "Elliot Mono", "JetBrains Mono", "DejaVu Sans Mono", ui-monospace, monospace;
   --pf-global--FontFamily--sans-serif: var(--el-mono) !important;
   --pf-global--FontFamily--heading--sans-serif: var(--el-mono) !important;
   --pf-global--FontFamily--monospace: var(--el-mono) !important;

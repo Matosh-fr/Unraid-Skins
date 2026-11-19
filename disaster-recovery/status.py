@@ -84,7 +84,7 @@ elif CFG.get("ha_url"):
         syslog.append({"tag": "power", "msg": f"home assistant unreachable ({type(e).__name__})", "warn": True})
 
 out = {"verdict": agent.get("verdict", "?"), "verdict_en": vd[0].upper(), "headline": agent.get("headline", ""), "lines": lines,
-       "when": gen.strftime("%d/%m %H:%M"), "stamp": gen.strftime("%b %d %H:%M:%S").lower(), "proc": "eliot",
+       "when": gen.strftime("%d/%m %H:%M"), "stamp": gen.strftime("%b %d %H:%M:%S").lower(), "proc": "elliot",
        "pid": 2000 + gen.timetuple().tm_yday, "syslog": syslog}
 json.dump(out, open(os.path.join(K, "src", "status.json"), "w"), ensure_ascii=False)
 print("header:", " | ".join(l["t"] for l in lines), "||", " | ".join(s["msg"] for s in syslog))
