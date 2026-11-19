@@ -109,4 +109,4 @@ python3 src/texture.py    # hex-dump page background
   [Retro CRT terminal screen in CSS + JS](https://dev.to/ekeijl/retro-crt-terminal-screen-in-css-js-4afh),
   [Vintage terminal effect in CSS3](https://blog.carbonfive.com/vintage-terminal-effect-in-css3/),
   [Fallout.css](https://www.cssscript.com/retro-futuristic-fallout/).
-- No license has been chosen for the skin's own code yet; until one is added, all rights are reserved.
+- The skin's own code and images are released under the [MIT License](../LICENSE). The embedded font keeps its own license (SIL OFL 1.1, see above).
