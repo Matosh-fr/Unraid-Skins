@@ -1,0 +1,114 @@
+.pf-c-login__main-header-desc, ak-stage-identification .pf-c-login__main-header p, [part="application-pre"] { display: none !important; }
+/* Portail sur mobile : la liste forcee par Authentik (< 768 px) est affichee en tuiles */
+@media (max-width: 768px) {
+  [part=app-list][data-view-mode=list] .app-group-rows { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 10px !important; padding: 6px 0 !important; }
+  [part=app-list][data-view-mode=list] .app-row { display: flex !important; flex-direction: column !important; align-items: center !important; grid-column: auto !important; text-align: center !important; padding: 14px 4px 10px !important; border: 1px solid var(--pf-global--BorderColor--100) !important; border-radius: 12px !important; }
+  [part=app-list][data-view-mode=list] .app-row:last-child { border: 1px solid var(--pf-global--BorderColor--100) !important; }
+  [part=app-list][data-view-mode=list] .app-row-link { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 8px !important; grid-column: auto !important; width: 100% !important; }
+  [part=app-list][data-view-mode=list] [part=row-icon-host] { transform: scale(1.35); margin: 6px 0 4px !important; }
+  [part=app-list][data-view-mode=list] .row-title { font-size: 0.82rem !important; }
+  [part=app-list][data-view-mode=list] .row-meta { display: none !important; }
+  [part=app-list][data-view-mode=list] [part=card-header-actions] { position: absolute !important; top: 2px !important; right: 2px !important; }
+}
+
+/* Logo Serveur : plus grand dans l'en-tete du portail et sur les pages de connexion */
+.logo { height: 46px !important; }
+.pf-c-brand .branding-logo { width: 130px !important; max-width: 60% !important; }
+
+/* === Portail (page des applications) : habillage === */
+[part=background-default-slant] {
+  clip-path: none !important; height: 100dvh !important;
+  background:
+    radial-gradient(900px 480px at 12% -8%, rgba(56,189,248,0.16), transparent 62%),
+    radial-gradient(800px 480px at 92% 2%, rgba(168,85,247,0.13), transparent 60%),
+    linear-gradient(180deg, #161a22 0%, #12151b 100%) !important;
+}
+:host(ak-library-impl) .pf-c-page__title { font-size: 0 !important; }
+:host(ak-library-impl) .pf-c-page__title::after {
+  content: "Bonjour 👋"; font-size: 2rem; font-weight: 600; letter-spacing: -0.01em; color: #f1f5f9;
+}
+[part=app-group-header] h2 {
+  text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.78rem !important;
+  font-weight: 700; color: #38bdf8 !important; margin-bottom: 0.4rem;
+}
+[part=app-list][data-view-mode=grid] [part=card] {
+  background: rgba(255,255,255,0.035) !important; backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 16px !important;
+  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease !important;
+}
+[part=app-list][data-view-mode=grid] [part=card]:hover {
+  transform: translateY(-3px); border-color: rgba(56,189,248,0.55) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35), 0 0 0 1px rgba(56,189,248,0.15) !important;
+}
+[part=app-list] [part=card-title], [part=app-list] .row-title { color: #e8edf3 !important; font-weight: 600 !important; }
+[part=app-list] [part=card-header]:hover .pf-c-card__title { text-decoration: none !important; }
+[part=app-list] hr[part=app-group-separator] { opacity: 0; margin: 0.6rem 0 !important; }
+
+/* Portail : logo plus grand dans l'en-tete, sections cote a cote sur grand ecran */
+.pf-c-page__header-brand-link img { height: 48px !important; width: auto !important; max-height: none !important; }
+@media (min-width: 1100px) {
+  [part=app-list][data-view-mode=grid] { display: grid !important; grid-template-columns: minmax(0, 1fr); column-gap: 2.5rem; align-items: start; }
+  [part=app-list][data-view-mode=grid] [part=app-group] { width: 100% !important; }
+}
+
+/* === Ordre du portail : Multimedia puis Infra, sur toutes les largeurs (sans flex, order est ignore sur mobile) === */
+[part=app-list] { display: flex !important; flex-direction: column !important; }
+[part=app-list] [data-group-id="infra"] { order: 2; }
+[part=app-list] [data-group-id="infra"] [data-application-name="un-raid"] { order: 1; }
+[part=app-list] [data-group-id="infra"] [data-application-name="unraid"] { order: 1; }
+[part=app-list] [data-group-id="infra"] [data-application-name="home-assistant"] { order: 2; }
+[part=app-list] [data-group-id="infra"] [data-application-name="nextcloud"] { order: 3; }
+[part=app-list] [data-group-id="infra"] [data-application-name="docuseal"] { order: 4; }
+[part=app-list] [data-group-id="infra"] [data-application-name="docu-seal"] { order: 4; }
+[part=app-list] [data-group-id="infra"] [data-application-name="secrets"] { order: 5; }
+[part=app-list] [data-group-id="infra"] [data-application-name="secret"] { order: 5; }
+[part=app-list] [data-group-id="infra"] [data-application-name="vault-secret"] { order: 5; }
+[part=app-list] [data-group-id="infra"] [data-application-name="vaultwarden"] { order: 6; }
+[part=app-list] [data-group-id="infra"] [data-application-name="terminal"] { order: 7; }
+[part=app-list] [data-group-id="infra"] [data-application-name="terminal-tmux"] { order: 7; }
+[part=app-list] [data-group-id="infra"] [data-application-name="vs-codium"] { order: 8; }
+[part=app-list] [data-group-id="infra"] [data-application-name="paperless"] { order: 9; }
+[part=app-list] [data-group-id="infra"] [data-application-name="vault-backup"] { order: 10; }
+[part=app-list] [data-group-id="infra"] [data-application-name="nextcloud-aio"] { order: 11; }
+[part=app-list] [data-group-id="infra"] [data-application-name="nextcloud-aio-admin"] { order: 11; }
+[part=app-list] [data-group-id="infra"] [data-application-name="traefik"] { order: 12; }
+[part=app-list] [data-group-id="infra"] [data-application-name="crowd-sec"] { order: 13; }
+[part=app-list] [data-group-id="multimedia"] { order: 1; }
+[part=app-list] [data-group-id="multimedia"] [data-application-name="plex"] { order: 1; }
+[part=app-list] [data-group-id="multimedia"] [data-application-name="hub"] { order: 2; }
+[part=app-list] [data-group-id="multimedia"] [data-application-name="seerr"] { order: 4; }
+[part=app-list] [data-group-id="multimedia"] [data-application-name="q-bittorrent"] { order: 5; }
+[part=app-list] [data-group-id="multimedia"] [data-application-name="sonarr"] { order: 6; }
+[part=app-list] [data-group-id="multimedia"] [data-application-name="radarr"] { order: 7; }
+[part=app-list] [data-group-id="multimedia"] [data-application-name="prowlarr"] { order: 8; }
+[part=app-list] [data-group-id="multimedia"] [data-application-name="qui"] { order: 8; }
+[part=app-list] [data-group-id="multimedia"] [data-application-name="arr"] { order: 3; }
+[part=app-list] [data-group-id="multimedia"] [data-application-name="arr-dashboard"] { order: 3; }
+[part=app-list] [data-group-id="multimedia"] [data-application-name="tautulli"] { order: 9; }
+[part=app-list] [data-group-id="multimedia"] [data-application-name="kavita"] { order: 10; }
+[part=app-list] [data-group-id="multim-dia"] { order: 1; }
+[part=app-list] [data-group-id="multim-dia"] [data-application-name="plex"] { order: 1; }
+[part=app-list] [data-group-id="multim-dia"] [data-application-name="hub"] { order: 2; }
+[part=app-list] [data-group-id="multim-dia"] [data-application-name="seerr"] { order: 4; }
+[part=app-list] [data-group-id="multim-dia"] [data-application-name="q-bittorrent"] { order: 5; }
+[part=app-list] [data-group-id="multim-dia"] [data-application-name="sonarr"] { order: 6; }
+[part=app-list] [data-group-id="multim-dia"] [data-application-name="radarr"] { order: 7; }
+[part=app-list] [data-group-id="multim-dia"] [data-application-name="prowlarr"] { order: 8; }
+[part=app-list] [data-group-id="multim-dia"] [data-application-name="qui"] { order: 8; }
+[part=app-list] [data-group-id="multim-dia"] [data-application-name="arr"] { order: 3; }
+[part=app-list] [data-group-id="multim-dia"] [data-application-name="arr-dashboard"] { order: 3; }
+[part=app-list] [data-group-id="multim-dia"] [data-application-name="tautulli"] { order: 9; }
+[part=app-list] [data-group-id="multim-dia"] [data-application-name="kavita"] { order: 10; }
+[part=app-list] [data-group-id="multimédia"] { order: 1; }
+[part=app-list] [data-group-id="multimédia"] [data-application-name="plex"] { order: 1; }
+[part=app-list] [data-group-id="multimédia"] [data-application-name="hub"] { order: 2; }
+[part=app-list] [data-group-id="multimédia"] [data-application-name="seerr"] { order: 4; }
+[part=app-list] [data-group-id="multimédia"] [data-application-name="q-bittorrent"] { order: 5; }
+[part=app-list] [data-group-id="multimédia"] [data-application-name="sonarr"] { order: 6; }
+[part=app-list] [data-group-id="multimédia"] [data-application-name="radarr"] { order: 7; }
+[part=app-list] [data-group-id="multimédia"] [data-application-name="prowlarr"] { order: 8; }
+[part=app-list] [data-group-id="multimédia"] [data-application-name="qui"] { order: 8; }
+[part=app-list] [data-group-id="multimédia"] [data-application-name="arr"] { order: 3; }
+[part=app-list] [data-group-id="multimédia"] [data-application-name="arr-dashboard"] { order: 3; }
+[part=app-list] [data-group-id="multimédia"] [data-application-name="tautulli"] { order: 9; }
+[part=app-list] [data-group-id="multimédia"] [data-application-name="kavita"] { order: 10; }
