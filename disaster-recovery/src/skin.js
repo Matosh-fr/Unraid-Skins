@@ -73,7 +73,7 @@
       var h = w.firstChild; h.textContent = host; h.setAttribute('data-text', host);
       a.insertBefore(w, a.firstChild);
       a.setAttribute('title', 'hello, friend.');
-      // bloc unique : lignes clés d'Eliot + journal (coût, tarif, capteurs), posé à la limite du fondu au noir
+      // bloc unique : lignes clés d'Elliot + journal (coût, tarif, capteurs), posé à la limite du fondu au noir
       var st = window.__skinStatus;
       if (st && !document.getElementById('el-syslog')) {
         var hdrEl = document.getElementById('header');
@@ -86,7 +86,7 @@
         sl.className = 'el-blk';
         var sx = document.createElement('div');
         sx.id = 'el-stats'; sx.className = 'el-blk';
-        sl.title = 'Eliot · run ' + st.when + (st.headline ? ' — ' + st.headline : '');
+        sl.title = 'Elliot · run ' + st.when + (st.headline ? ' — ' + st.headline : '');
         sx.title = sl.title;
         var v = document.createElement('div');
         v.className = 'el-gl-v el-gl-v-' + String(st.verdict_en || '').toLowerCase();
@@ -101,7 +101,7 @@
         (st.syslog || []).forEach(function (l, i) {
           var d = document.createElement('div');
           d.className = 'l-' + l.tag + (l.warn ? ' l-warn' : '') + (i === 0 ? ' l-first' : '');
-          var parts = [['ts', st.stamp + ' '], ['hn', host + ' '], ['pr', (st.proc || 'eliot') + '[' + st.pid + ']: '], ['tg', ('[' + l.tag + ']          ').slice(0, 11)], ['ms', l.msg + (l.warn ? ' [!]' : '')]];
+          var parts = [['ts', st.stamp + ' '], ['hn', host + ' '], ['pr', (st.proc || 'elliot') + '[' + st.pid + ']: '], ['tg', ('[' + l.tag + ']          ').slice(0, 11)], ['ms', l.msg + (l.warn ? ' [!]' : '')]];
           parts.forEach(function (x) { var sp = document.createElement('span'); sp.className = x[0]; sp.textContent = x[1]; d.appendChild(sp); });
           sx.appendChild(d);
         });

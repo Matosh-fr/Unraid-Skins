@@ -1,4 +1,4 @@
-# Décor de l'en-tête Unraid façon Eliot : faux journal système en fond (tuile 2400x168, répétée).
+# Décor de l'en-tête Unraid façon Elliot : faux journal système en fond (tuile 2400x168, répétée).
 # Le fondu au noir est fait en CSS ; la vraie ligne de log (coût électrique…) est du texte posé par custom.js.
 import os, random, sys
 from PIL import Image, ImageDraw, ImageFont
@@ -11,7 +11,7 @@ d = ImageDraw.Draw(img)
 f = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 13)
 
 PROCS = ["kernel", "dockerd", "containerd", "crond", "sshd", "nginx", "emhttpd", "zed", "smartd", "apcupsd",
-         "traefik", "crowdsec", "qemu-ga", "avahi-daemon", "rsyslogd", "eliot"]
+         "traefik", "crowdsec", "qemu-ga", "avahi-daemon", "rsyslogd", "elliot"]
 MSGS = [
     "br-3a83: port {n}(veth{h}) entered forwarding state", "zfs: pool 'storage' scrub in progress, 0 errors",
     "ata{n}.00: configured for UDMA/133", "nvme0: temperature {t}C, ok", "containerd: shim reaped id={h}",

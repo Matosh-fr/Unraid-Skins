@@ -1,0 +1,156 @@
+/* ==========================================================================
+   DISASTER RECOVERY : skin Authentik (même charte que le skin Unraid)
+   Noir terminal, blanc cassé, rouge. Police JetBrains Mono (SIL OFL 1.1).
+   CSS pur (Authentik n'accepte pas de JS) : balayage, vignette, scintillement.
+   Ajouté APRÈS base.css (ordre du portail, mobile) : les règles ci-dessous l'emportent.
+   ========================================================================== */
+@font-face { font-family: "Elliot Mono"; font-weight: 400; font-display: swap; src: url("__FONT400__") format("woff2"); }
+@font-face { font-family: "Elliot Mono"; font-weight: 700; font-display: swap; src: url("__FONT700__") format("woff2"); }
+
+:root, :host, html[data-theme], body {
+  --el-red: #ff1e3c; --el-red-dim: #8a0a1f; --el-green: #3dff8b; --el-cyan: #5ee7ff; --el-amber: #ffb020;
+  --el-mono: "Elliot Mono", "JetBrains Mono", "DejaVu Sans Mono", ui-monospace, monospace;
+  --pf-global--FontFamily--sans-serif: var(--el-mono) !important;
+  --pf-global--FontFamily--heading--sans-serif: var(--el-mono) !important;
+  --pf-global--FontFamily--monospace: var(--el-mono) !important;
+  --pf-global--primary-color--100: var(--el-red) !important;
+  --pf-global--primary-color--200: #ff5c74 !important;
+  --pf-global--link--Color: var(--el-red) !important;
+  --pf-global--link--Color--hover: #ff5c74 !important;
+  --pf-global--active-color--100: var(--el-red) !important;
+  --pf-global--BorderColor--100: #26262b !important;
+  --pf-global--BorderColor--200: #2a2a30 !important;
+  --pf-global--BackgroundColor--100: #0a0a0b !important;
+  --pf-global--BackgroundColor--200: #111113 !important;
+  --pf-global--BackgroundColor--dark-100: #000 !important;
+  --pf-global--Color--100: #e6e6e6 !important;
+  --pf-global--Color--200: #8a8a92 !important;
+  --pf-global--BorderRadius--sm: 2px !important;
+  --pf-global--BorderRadius--lg: 3px !important;
+  --ak-accent: var(--el-red) !important;
+  --ak-dark-background: #000 !important;
+  --ak-dark-background-darker: #030303 !important;
+  --ak-dark-background-light: #0a0a0b !important;
+  --ak-dark-background-light-ish: #111113 !important;
+  --ak-dark-foreground: #e6e6e6 !important;
+  --ak-dark-foreground-darker: #b4b4bb !important;
+}
+html, body { font-family: var(--el-mono) !important; background-color: #000 !important; }
+* { scrollbar-color: var(--el-red-dim) #050505; scrollbar-width: thin; }
+::selection { background: var(--el-red); color: #fff; }
+
+/* ---- fond : hexdump + balayage + vignette (page de connexion et portail) ---- */
+:host(ak-flow-executor) .pf-c-login, .pf-c-login, [data-layout] .pf-c-login, ak-flow-executor, ak-interface-user, ak-interface-admin {
+  background-color: #000 !important;
+  background-image: url("__TEXTURE__") !important;
+  background-repeat: repeat !important; background-attachment: fixed !important;
+}
+[part=background-default-slant] {
+  background: linear-gradient(180deg, #050505 0%, #000 100%) !important;
+  background-image: url("__TEXTURE__") !important;
+}
+:host(ak-flow-executor) .pf-c-login::after, .pf-c-login::after, body::after {
+  content: ""; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0,0,0,.22) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.6) 100%);
+  mix-blend-mode: multiply;
+}
+/* barre de balayage qui descend lentement */
+body::before {
+  content: ""; position: fixed; left: 0; right: 0; top: -12vh; height: 12vh; z-index: 2147482999; pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgba(255,30,60,.05), transparent);
+  animation: el-roll 9s linear infinite;
+}
+@keyframes el-roll { to { top: 112vh; } }
+@keyframes el-blink { 50% { opacity: 0; } }
+@keyframes el-flick { 0%, 96%, 100% { opacity: 1; } 97% { opacity: .82; } 98% { opacity: 1; } 99% { opacity: .9; } }
+@keyframes el-gl { 0%, 93%, 100% { text-shadow: 0 0 10px rgba(255,30,60,.5); transform: none; }
+  94% { text-shadow: -3px 0 rgba(255,30,60,.9), 3px 0 rgba(94,231,255,.8); transform: translateX(1px); }
+  96% { text-shadow: 3px 0 rgba(255,30,60,.9), -3px 0 rgba(94,231,255,.8); transform: translateX(-1px); } }
+
+/* ---- carte de connexion ---- */
+.pf-c-login__main, [part=main] {
+  background: rgba(3,3,3,.94) !important;
+  border: 1px solid var(--el-red) !important; border-radius: 2px !important;
+  box-shadow: 0 0 0 1px rgba(255,30,60,.1), 0 0 38px -8px rgba(255,30,60,.45), inset 0 0 40px rgba(255,30,60,.04) !important;
+  animation: el-flick 7s steps(1) infinite;
+}
+.pf-c-login__main-header, [part=branding] { border-bottom: 0 !important; }
+.pf-c-login__main-header .pf-c-title, .pf-c-title, h1, h2 {
+  font-family: var(--el-mono) !important; font-weight: 700 !important; letter-spacing: 1px;
+  text-transform: lowercase; color: #f2f2f2 !important;
+}
+.pf-c-login__main-header .pf-c-title::before, .pf-c-title::before { content: "root@vault:~$ "; color: var(--el-red); font-weight: 400; }
+.pf-c-login__main-header .pf-c-title::after { content: ""; display: inline-block; width: 9px; height: 1em; margin-left: 5px; vertical-align: -2px; background: var(--el-red); animation: el-blink 1.05s steps(1) infinite; }
+.pf-c-login__main-footer-links, .pf-c-login__footer, [part=footer], footer { color: #55555c !important; font-family: var(--el-mono) !important; font-size: 11px !important; }
+.pf-c-login__footer a, footer a { color: #8a8a92 !important; }
+.pf-c-login__footer a:hover, footer a:hover { color: var(--el-red) !important; }
+.pf-c-brand .branding-logo, .pf-c-brand img, .pf-c-page__header-brand-link img {
+  filter: grayscale(1) brightness(1.4) contrast(1.1) drop-shadow(0 0 8px rgba(255,30,60,.55));
+  animation: el-gl 6s steps(1) infinite;
+}
+
+/* ---- champs et boutons ---- */
+.pf-c-form-control, input, select, textarea, .pf-c-form-control:focus {
+  font-family: var(--el-mono) !important; background: #050505 !important; color: #e6e6e6 !important;
+  border: 1px solid #2a2a30 !important; border-radius: 2px !important; box-shadow: none !important;
+}
+.pf-c-form-control::after { border: 0 !important; }
+.pf-c-form-control:focus, input:focus { border-color: var(--el-red) !important; box-shadow: 0 0 0 1px var(--el-red), 0 0 14px rgba(255,30,60,.25) !important; outline: 0 !important; }
+.pf-c-form__label-text, label { font-family: var(--el-mono) !important; text-transform: lowercase; letter-spacing: .5px; color: #a8a8b0 !important; }
+.pf-c-form__label-required { color: var(--el-red) !important; }
+.pf-c-button { font-family: var(--el-mono) !important; border-radius: 2px !important; text-transform: lowercase; letter-spacing: .5px; transition: color .15s, background .15s, box-shadow .15s; }
+.pf-c-button.pf-m-primary { background: transparent !important; color: var(--el-red) !important; border: 1px solid var(--el-red) !important; }
+.pf-c-button.pf-m-primary::before { content: "> "; }
+.pf-c-button.pf-m-primary:hover, .pf-c-button.pf-m-primary:focus { background: var(--el-red) !important; color: #fff !important; box-shadow: 0 0 18px rgba(255,30,60,.55) !important; }
+.pf-c-button.pf-m-secondary, .pf-c-button.pf-m-tertiary, .pf-c-button.pf-m-control { background: transparent !important; color: #b4b4bb !important; border: 1px solid #2a2a30 !important; }
+.pf-c-button.pf-m-secondary:hover, .pf-c-button.pf-m-tertiary:hover { color: #fff !important; border-color: var(--el-red) !important; }
+.pf-c-button::after { border: 0 !important; }
+a { color: var(--el-red); } a:hover { color: #ff5c74; text-shadow: -1px 0 rgba(255,30,60,.8), 1px 0 rgba(94,231,255,.6); }
+.pf-c-helper-text__item.pf-m-error, .pf-c-form__helper-text.pf-m-error, .pf-m-danger { color: var(--el-red) !important; }
+.pf-c-alert { border-radius: 2px !important; background: #0a0a0b !important; border: 1px solid #2a2a30 !important; }
+.pf-c-alert.pf-m-danger { border-color: var(--el-red) !important; }
+.pf-c-alert.pf-m-warning { border-color: var(--el-amber) !important; }
+.pf-c-alert.pf-m-success { border-color: var(--el-green) !important; }
+
+/* ---- portail des applications ---- */
+[part=background-default-slant] { clip-path: none !important; }
+/* prompt clignotant à la place du titre, recherche intégrée juste derrière (comme sur Unraid) */
+:host(ak-library-impl) .pf-c-page__header { display: flex !important; align-items: center !important; gap: 0 !important; }
+:host(ak-library-impl) .pf-c-page__title { order: 1; flex: 0 0 auto !important; margin: 0 !important; display: inline-flex; align-items: center; white-space: nowrap; }
+:host(ak-library-impl) .pf-c-page__title::before {
+  content: "root@vault: ~/apps #"; font-family: var(--el-mono); font-size: 1.05rem; font-weight: 400; color: var(--el-red);
+  text-shadow: 0 0 10px rgba(255,30,60,.45); padding-right: 10px;
+}
+:host(ak-library-impl) .pf-c-page__title::after {
+  content: ""; display: inline-block; width: 10px; height: 1.1rem; background: var(--el-red); animation: el-blink 1.05s steps(1) infinite;
+}
+:host(ak-library-impl) .pf-c-page__header:has(input:not(:placeholder-shown)) .pf-c-page__title::after { display: none; }
+:host(ak-library-impl) search { order: 2 !important; margin: 0 0 0 4px !important; flex: 1 1 auto; max-width: 34ch; }
+:host(ak-library-impl) search form, :host(ak-library-impl) search .pf-c-form-control { width: 100% !important; }
+:host(ak-library-impl) search form input.pf-c-form-control[part="search-input"], :host(ak-library-impl) search form input.pf-c-form-control[part="search-input"]:focus { background: transparent !important; border: 0 !important; box-shadow: none !important; outline: 0 !important; padding-left: 0 !important; font-size: 1.05rem !important; color: #fff !important; caret-color: var(--el-red); }
+:host(ak-library-impl) search form input[part="search-input"]:placeholder-shown { caret-color: transparent !important; }
+:host(ak-library-impl) search form input[part="search-input"]::placeholder { color: transparent; }
+:host(ak-library-impl) .library-view-toggle { order: 3 !important; margin-left: auto !important; }
+:host(ak-library-impl) .pf-c-page__header:focus-within, :host(ak-library-impl) .pf-c-page__header:hover { background: rgba(255,30,60,.05) !important; }
+
+[part=app-group-header] h2 { color: var(--el-red) !important; font-family: var(--el-mono) !important; letter-spacing: .16em; }
+[part=app-group-header] h2::before { content: "# "; }
+[part=app-list][data-view-mode=grid] [part=card] {
+  background: rgba(3,3,3,.92) !important; backdrop-filter: none;
+  border: 1px solid #26262b !important; border-radius: 2px !important;
+}
+[part=app-list][data-view-mode=grid] [part=card]:hover {
+  transform: none; border-color: var(--el-red) !important;
+  box-shadow: 0 0 22px -6px rgba(255,30,60,.55), inset 0 0 18px rgba(255,30,60,.06) !important;
+}
+[part=app-list] [part=card-title], [part=app-list] .row-title { color: #e6e6e6 !important; font-family: var(--el-mono) !important; text-transform: lowercase; }
+[part=app-list] [part=card]:hover [part=card-title] { color: #fff !important; text-shadow: -1px 0 rgba(255,30,60,.8), 1px 0 rgba(94,231,255,.6); }
+.pf-c-page__header, .pf-c-page__sidebar, .pf-c-nav { background: #030303 !important; border-bottom: 1px solid var(--el-red) !important; }
+.pf-c-nav__link { font-family: var(--el-mono) !important; text-transform: lowercase; }
+.pf-c-nav__link.pf-m-current { color: #fff !important; background: rgba(255,30,60,.12) !important; box-shadow: inset 0 -2px 0 var(--el-red); }
+
+ak-flow-card, ak-flow-card .pf-c-card, .pf-c-login__main .pf-c-card { background: transparent !important; border: 0 !important; box-shadow: none !important; animation: none !important; }
+
+@media (prefers-reduced-motion: reduce) { body::before, .pf-c-login__main, ak-flow-card, .pf-c-brand img { animation: none !important; } }

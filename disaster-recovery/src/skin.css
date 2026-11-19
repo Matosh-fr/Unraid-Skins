@@ -2,8 +2,8 @@
    DISASTER RECOVERY : Unraid skin (Aurora Theme overlay, Black mode)
    Terminal look: black, off-white, red. Font: JetBrains Mono (SIL OFL 1.1), embedded by build.py.
    ========================================================================== */
-@font-face { font-family: "Eliot Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("__FONT400__") format("woff2"); }
-@font-face { font-family: "Eliot Mono"; font-weight: 700; font-style: normal; font-display: swap; src: url("__FONT700__") format("woff2"); }
+@font-face { font-family: "Elliot Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("__FONT400__") format("woff2"); }
+@font-face { font-family: "Elliot Mono"; font-weight: 700; font-style: normal; font-display: swap; src: url("__FONT700__") format("woff2"); }
 
 /* ---- palette : noir terminal, blanc cassé, rouge ---- */
 html:root.Theme--black {
@@ -12,7 +12,7 @@ html:root.Theme--black {
     --el-green: #3dff8b;
     --el-amber: #ffb020;
     --el-cyan: #5ee7ff;
-    --el-mono: "Eliot Mono", "JetBrains Mono", "DejaVu Sans Mono", ui-monospace, monospace;
+    --el-mono: "Elliot Mono", "JetBrains Mono", "DejaVu Sans Mono", ui-monospace, monospace;
 
     --tp-bg: #000000;
     --tp-elevated: #0a0a0b;
@@ -270,20 +270,20 @@ html.el-glitching div.title { animation: el-glitch .15s steps(2) 5; }
     html.Theme--black *, html.Theme--black *::before, html.Theme--black *::after { animation: none !important; transition: none !important; }
 }
 
-/* ---- en-tête : bannière Eliot générée + nom du serveur à la place du logo Unraid ---- */
+/* ---- en-tête : bannière Elliot générée + nom du serveur à la place du logo Unraid ---- */
 html.Theme--black #header {
     background: #030304 url("__HEADER__") left center / auto 100% repeat-x !important;
     border-bottom: 1px solid rgba(255, 30, 60, .55) !important;
     height: 76px !important; min-height: 76px !important;
 }
 html.Theme--black #header > unraid-header, html.Theme--black #header #UnraidHeader { height: 100% !important; }
-/* fondu au noir : noir plein jusqu'au journal d'Eliot, puis le décor de logs apparaît */
+/* fondu au noir : noir plein jusqu'au journal d'Elliot, puis le décor de logs apparaît */
 #el-fade {
     position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(90deg, #030304 0, #030304 var(--el-fade-x, 640px), rgba(3, 3, 4, .55) calc(var(--el-fade-x, 640px) + 260px), transparent calc(var(--el-fade-x, 640px) + 520px));
 }
 html.Theme--black #header > unraid-header { position: relative; z-index: 2; display: block; }
-/* le journal d'Eliot : fait partie du décor, mis à jour à chaque passage du matin */
+/* le journal d'Elliot : fait partie du décor, mis à jour à chaque passage du matin */
 .el-blk {
     position: absolute; top: 50%; transform: translateY(-50%); left: var(--el-syslog-left, 660px); z-index: 3;
     font-family: var(--el-mono); font-size: 10px; line-height: 1.25; white-space: nowrap; color: #5d5d66;

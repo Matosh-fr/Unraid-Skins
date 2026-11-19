@@ -57,7 +57,7 @@ The header report is optional. Without `src/status.json` the skin simply shows t
 ```json
 {
   "verdict": "ATTENTION", "verdict_en": "ATTENTION", "headline": "tooltip text",
-  "when": "18/11 21:41", "stamp": "nov 18 21:41:29", "proc": "eliot", "pid": 2322,
+  "when": "18/11 21:41", "stamp": "nov 18 21:41:29", "proc": "elliot", "pid": 2322,
   "lines":  [ {"t": "2 fixes · 8 todo", "c": "amber"}, {"t": "cve : none", "c": "mut"} ],
   "syslog": [ {"tag": "power", "msg": "server : 9.92 · ~30 days : 16.62 · 63kwh"},
               {"tag": "cost",  "msg": "today : red · tomorrow : blue", "warn": true} ]
