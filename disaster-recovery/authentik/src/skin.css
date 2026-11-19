@@ -116,8 +116,25 @@ a { color: var(--el-red); } a:hover { color: #ff5c74; text-shadow: -1px 0 rgba(2
 
 /* ---- portail des applications ---- */
 [part=background-default-slant] { clip-path: none !important; }
-:host(ak-library-impl) .pf-c-page__title::after { content: "hello, friend."; font-family: var(--el-mono); font-size: 1.7rem; font-weight: 700; color: #f2f2f2; text-shadow: 0 0 12px rgba(255,30,60,.45); }
-:host(ak-library-impl) .pf-c-page__title::before { content: "root@vault:~$ "; font-size: 1rem; color: var(--el-red); font-family: var(--el-mono); }
+/* prompt clignotant à la place du titre, recherche intégrée juste derrière (comme sur Unraid) */
+:host(ak-library-impl) .pf-c-page__header { display: flex !important; align-items: center !important; gap: 0 !important; }
+:host(ak-library-impl) .pf-c-page__title { order: 1; flex: 0 0 auto !important; margin: 0 !important; display: inline-flex; align-items: center; white-space: nowrap; }
+:host(ak-library-impl) .pf-c-page__title::before {
+  content: "root@vault: ~/apps #"; font-family: var(--el-mono); font-size: 1.05rem; font-weight: 400; color: var(--el-red);
+  text-shadow: 0 0 10px rgba(255,30,60,.45); padding-right: 10px;
+}
+:host(ak-library-impl) .pf-c-page__title::after {
+  content: ""; display: inline-block; width: 10px; height: 1.1rem; background: var(--el-red); animation: el-blink 1.05s steps(1) infinite;
+}
+:host(ak-library-impl) .pf-c-page__header:has(input:not(:placeholder-shown)) .pf-c-page__title::after { display: none; }
+:host(ak-library-impl) search { order: 2 !important; margin: 0 0 0 4px !important; flex: 1 1 auto; max-width: 34ch; }
+:host(ak-library-impl) search form, :host(ak-library-impl) search .pf-c-form-control { width: 100% !important; }
+:host(ak-library-impl) search form input.pf-c-form-control[part="search-input"], :host(ak-library-impl) search form input.pf-c-form-control[part="search-input"]:focus { background: transparent !important; border: 0 !important; box-shadow: none !important; outline: 0 !important; padding-left: 0 !important; font-size: 1.05rem !important; color: #fff !important; caret-color: var(--el-red); }
+:host(ak-library-impl) search form input[part="search-input"]:placeholder-shown { caret-color: transparent !important; }
+:host(ak-library-impl) search form input[part="search-input"]::placeholder { color: transparent; }
+:host(ak-library-impl) .library-view-toggle { order: 3 !important; margin-left: auto !important; }
+:host(ak-library-impl) .pf-c-page__header:focus-within, :host(ak-library-impl) .pf-c-page__header:hover { background: rgba(255,30,60,.05) !important; }
+
 [part=app-group-header] h2 { color: var(--el-red) !important; font-family: var(--el-mono) !important; letter-spacing: .16em; }
 [part=app-group-header] h2::before { content: "# "; }
 [part=app-list][data-view-mode=grid] [part=card] {

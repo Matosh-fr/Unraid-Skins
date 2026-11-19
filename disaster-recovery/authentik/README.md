@@ -2,7 +2,7 @@
 
 Même charte que le skin Unraid (noir, blanc cassé, rouge, JetBrains Mono, scanlines, vignette, hexdump), en CSS pur
 puisque Authentik n'accepte pas de JS dans le CSS de marque : carte de connexion encadrée de rouge avec scintillement,
-`root@vault:~$ connexion ▌`, logo en glitch périodique, boutons `> continue`, portail `hello, friend.` avec tuiles carrées.
+`root@vault:~$ connexion ▌`, logo en glitch périodique, boutons `> continue`, portail avec le prompt clignotant `root@vault: ~/apps # ▌` qui est la barre de recherche (comme sur Unraid), tuiles carrées.
 
 - `src/base.css` : réglages d'origine de la marque (ordre du portail, mobile, tailles de logo), repris tels quels.
 - `src/skin.css` : la peau, ajoutée après `base.css`.
