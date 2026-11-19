@@ -1,0 +1,37 @@
+{
+ "verdict": "ATTENTION",
+ "verdict_en": "ATTENTION",
+ "headline": "",
+ "lines": [
+  {
+   "t": "2 fixes · 8 todo",
+   "c": "amber"
+  },
+  {
+   "t": "cve : 2 open [!]",
+   "c": "red"
+  },
+  {
+   "t": "2 movies · 14 episodes",
+   "c": "mut"
+  }
+ ],
+ "when": "19/11 10:09",
+ "stamp": "nov 19 10:09:14",
+ "proc": "eliot",
+ "pid": 2323,
+ "syslog": [
+  {
+   "tag": "power",
+   "msg": "server : 9.92 · ~30 days : 16.62 · 63kwh"
+  },
+  {
+   "tag": "cost",
+   "msg": "today : blue · tomorrow : unknown · 0.1654/kwh"
+  },
+  {
+   "tag": "sensors",
+   "msg": "cpu : 59°c · 170w · ups : 16mins · pc gaming : 2.13"
+  }
+ ]
+}

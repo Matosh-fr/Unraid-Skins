@@ -1,0 +1,6 @@
+# local state and secrets (never committed)
+**/config.json
+**/src/status.json
+**/backup/
+*.token
+__pycache__/

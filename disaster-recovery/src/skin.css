@@ -1,0 +1,398 @@
+/* ==========================================================================
+   DISASTER RECOVERY : Unraid skin (Aurora Theme overlay, Black mode)
+   Terminal look: black, off-white, red. Font: JetBrains Mono (SIL OFL 1.1), embedded by build.py.
+   ========================================================================== */
+@font-face { font-family: "Eliot Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("__FONT400__") format("woff2"); }
+@font-face { font-family: "Eliot Mono"; font-weight: 700; font-style: normal; font-display: swap; src: url("__FONT700__") format("woff2"); }
+
+/* ---- palette : noir terminal, blanc cassé, rouge ---- */
+html:root.Theme--black {
+    --el-red: #ff1e3c;
+    --el-red-dim: #8a0a1f;
+    --el-green: #3dff8b;
+    --el-amber: #ffb020;
+    --el-cyan: #5ee7ff;
+    --el-mono: "Eliot Mono", "JetBrains Mono", "DejaVu Sans Mono", ui-monospace, monospace;
+
+    --tp-bg: #000000;
+    --tp-elevated: #0a0a0b;
+    --tp-subtle: #111113;
+    --tp-text: #e6e6e6;
+    --tp-muted: #8a8a92;
+    --tp-border: #1f1f23;
+    --tp-input-border: #2a2a30;
+    --tp-primary: var(--el-red);
+    --tp-primary-ii: #ff5c74;
+    --tp-primary-soft: rgba(255, 30, 60, 0.13);
+    --tp-tab-active: #1a0a0d;
+    --tp-primary-text: #ffffff;
+    --tp-header-bg: #030303;
+    --tp-header-text: #f2f2f2;
+    --tp-header-muted: #8a8a92;
+    --tp-shadow-sm: 0 0 0 1px rgba(255, 30, 60, 0.04);
+    --tp-shadow-lg: 0 30px 70px -30px rgba(255, 30, 60, 0.18);
+    --tp-success-bg: #06200f;
+    --tp-success-text: var(--el-green);
+    --tp-danger: var(--el-red);
+    --tp-danger-soft: rgba(255, 30, 60, 0.12);
+    --tp-warn-bg: #261a03;
+    --tp-warn-text: var(--el-amber);
+    --tp-neutral-bg: #17171a;
+    --tp-neutral-text: #c9c9cf;
+    --tp-gradient: linear-gradient(135deg, var(--el-red), var(--el-red-dim));
+    --tp-font-heading: var(--el-mono);
+    --tp-r-sm: 2px;
+    --tp-r-md: 3px;
+    --tp-hsl-surface: 240 5% 4%;
+    --tp-hsl-subtle: 240 6% 7%;
+    --tp-hsl-border: 240 6% 13%;
+    --tp-hsl-input: 240 6% 17%;
+    --tp-hsl-primary: 351 100% 56%;
+    --tp-hsl-primary-text: 0 0% 100%;
+    --tp-hsl-muted: 240 4% 56%;
+    --tp-hsl-text: 0 0% 90%;
+    --brand-orange: var(--el-red);
+    --brand-red: var(--el-red);
+}
+
+/* ---- ambiance : hexdump en fond, lignes de balayage, vignette ---- */
+html.Theme--black body {
+    background-color: #000 !important;
+    background-image: url("__TEXTURE__") !important;
+    background-repeat: repeat !important;
+    background-attachment: fixed !important;
+}
+html.Theme--black body::after {
+    content: "";
+    position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
+    background:
+        repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 3px),
+        radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+    mix-blend-mode: multiply;
+}
+html.Theme--black ::selection { background: var(--el-red); color: #fff; }
+html.Theme--black * { scrollbar-color: var(--el-red-dim) #050505; scrollbar-width: thin; }
+html.Theme--black ::-webkit-scrollbar { width: 8px; height: 8px; background: #050505; }
+html.Theme--black ::-webkit-scrollbar-thumb { background: var(--el-red-dim); }
+html.Theme--black ::-webkit-scrollbar-thumb:hover { background: var(--el-red); }
+
+/* ---- barre de navigation : terminal ---- */
+html.Theme--black #menu {
+    background: rgba(3, 3, 3, 0.92) !important;
+    border-bottom: 1px solid var(--el-red) !important;
+    box-shadow: 0 1px 0 rgba(255, 30, 60, 0.25), 0 12px 30px -18px rgba(255, 30, 60, 0.45) !important;
+    backdrop-filter: blur(6px);
+}
+html.Theme--black #menu .nav-item a,
+html.Theme--black #menu .nav-user,
+html.Theme--black #menu .nav-user a {
+    font-family: var(--el-mono) !important;
+    font-size: 12.5px !important;
+    letter-spacing: 0.3px;
+    text-transform: lowercase;
+    border-radius: 2px !important;
+}
+html.Theme--black #menu .nav-item a { color: #a8a8b0 !important; transition: color .15s, text-shadow .15s; }
+html.Theme--black #menu .nav-item a:hover { color: #fff !important; text-shadow: -1px 0 rgba(255, 30, 60, .8), 1px 0 rgba(94, 231, 255, .6); background: transparent !important; }
+html.Theme--black #menu .nav-item.active a {
+    color: #fff !important;
+    background: rgba(255, 30, 60, 0.12) !important;
+    box-shadow: inset 0 -2px 0 var(--el-red) !important;
+    border: 0 !important;
+}
+html.Theme--black #menu .nav-item.active a::before { content: "> "; color: var(--el-red); }
+#el-prompt {
+    font-family: var(--el-mono); font-size: 12.5px; color: var(--el-red);
+    display: inline-flex; align-items: center; gap: 6px; padding: 0 14px 0 6px; white-space: nowrap; user-select: none;
+}
+#el-prompt b { color: #e6e6e6; font-weight: 400; }
+@keyframes el-blink { 50% { opacity: 0; } }
+
+/* ---- titres de section : ligne de commande ---- */
+html.Theme--black div.title,
+html.Theme--black .title {
+    font-family: var(--el-mono) !important;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #1f1f23 !important;
+}
+html.Theme--black div.title > span:first-child,
+html.Theme--black div.title .left {
+    font-family: var(--el-mono) !important;
+    text-transform: lowercase;
+}
+html.Theme--black div.title > span.left:not(.zfs_bar_text)::before {
+    content: "root@vault:~$ ";
+    color: var(--el-red);
+    font-family: var(--el-mono);
+    font-size: 12px;
+    margin-right: 4px;
+    opacity: .9;
+}
+html.Theme--black div.title > span > i,
+html.Theme--black div.title > i,
+html.Theme--black div.title .fa,
+html.Theme--black div.title [class^="icon-"] { display: none !important; }
+html.Theme--black table, html.Theme--black .tp-server-card, html.Theme--black #displaybox { background-color: rgba(6, 6, 7, .96) !important; }
+
+/* ---- panneaux, cartes, tuiles ---- */
+html.Theme--black .tp-server-card,
+html.Theme--black div.Panel,
+html.Theme--black table.dashboard,
+html.Theme--black .tile,
+html.Theme--black .tft-update-card {
+    background: rgba(8, 8, 9, 0.97) !important;
+    border: 1px solid #1f1f23 !important;
+    border-radius: 3px !important;
+}
+html.Theme--black div.Panel { transition: border-color .15s, box-shadow .15s, transform .15s; }
+html.Theme--black div.Panel:hover {
+    border-color: var(--el-red) !important;
+    box-shadow: 0 0 0 1px rgba(255, 30, 60, .35), 0 0 28px -8px rgba(255, 30, 60, .55) !important;
+}
+html.Theme--black div.Panel:hover span,
+html.Theme--black div.Panel:hover .PanelText { animation: el-glitch .35s steps(2) 1; color: #fff !important; }
+html.Theme--black div.Panel .PanelText,
+html.Theme--black div.Panel span { font-family: var(--el-mono) !important; font-size: 12px !important; }
+html.Theme--black div.Panel img,
+html.Theme--black div.Panel i { filter: grayscale(1) brightness(1.4) contrast(1.1); transition: filter .2s; }
+html.Theme--black div.Panel:hover img,
+html.Theme--black div.Panel:hover i { filter: none; }
+@keyframes el-glitch {
+    0% { text-shadow: 2px 0 var(--el-red), -2px 0 var(--el-cyan); transform: translateX(1px); }
+    50% { text-shadow: -2px 0 var(--el-red), 2px 0 var(--el-cyan); transform: translateX(-1px); }
+    100% { text-shadow: none; transform: none; }
+}
+
+/* ---- tableaux : chiffres en mono ---- */
+html.Theme--black table th {
+    font-family: var(--el-mono) !important;
+    text-transform: lowercase;
+    letter-spacing: .5px;
+    color: var(--el-red) !important;
+    font-weight: 700 !important;
+}
+html.Theme--black table td { font-variant-numeric: tabular-nums; }
+html.Theme--black table tbody tr:hover td { background: rgba(255, 30, 60, .06) !important; }
+
+/* ---- boutons et champs ---- */
+html.Theme--black input[type=button],
+html.Theme--black input[type=submit],
+html.Theme--black input[type=reset],
+html.Theme--black button:not(.el-keep),
+html.Theme--black a.button {
+    font-family: var(--el-mono) !important;
+    text-transform: lowercase !important;
+    letter-spacing: .5px;
+    background: transparent !important;
+    border: 1px solid var(--el-red) !important;
+    color: #f2f2f2 !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+    transition: background .15s, color .15s, box-shadow .15s;
+}
+html.Theme--black input[type=button]:hover,
+html.Theme--black input[type=submit]:hover,
+html.Theme--black button:not(.el-keep):hover,
+html.Theme--black a.button:hover {
+    background: var(--el-red) !important;
+    color: #000 !important;
+    box-shadow: 0 0 18px -4px rgba(255, 30, 60, .8) !important;
+}
+html.Theme--black input[type=text],
+html.Theme--black input[type=password],
+html.Theme--black input[type=number],
+html.Theme--black input[type=email],
+html.Theme--black input[type=search],
+html.Theme--black select,
+html.Theme--black textarea {
+    font-family: var(--el-mono) !important;
+    background: #050505 !important;
+    border: 1px solid #2a2a30 !important;
+    color: #e6e6e6 !important;
+    border-radius: 2px !important;
+    caret-color: var(--el-red);
+}
+html.Theme--black input:focus,
+html.Theme--black select:focus,
+html.Theme--black textarea:focus {
+    outline: none !important;
+    border-color: var(--el-red) !important;
+    box-shadow: 0 0 0 1px var(--el-red), 0 0 16px -6px rgba(255, 30, 60, .9) !important;
+}
+
+/* ---- barres d'utilisation (CPU, RAM, disques) ---- */
+html.Theme--black .usage-bar > span,
+html.Theme--black .usage-disk > span,
+html.Theme--black .usage-bar span.load,
+html.Theme--black div[class*="usage"] > span {
+    background: repeating-linear-gradient(90deg, var(--el-red) 0 6px, #000 6px 7px) !important;
+    box-shadow: 0 0 10px -2px rgba(255, 30, 60, .7);
+}
+html.Theme--black .usage-bar,
+html.Theme--black .usage-disk { background: #141416 !important; border-radius: 1px !important; }
+
+/* ---- pastilles d'état ---- */
+html.Theme--black .tp-pill { font-family: var(--el-mono) !important; border-radius: 2px !important; text-transform: lowercase; }
+html.Theme--black .tp-pill.tp-good { color: var(--el-green) !important; background: rgba(61, 255, 139, .08) !important; border: 1px solid rgba(61, 255, 139, .35) !important; }
+html.Theme--black .green-text, html.Theme--black .green { color: var(--el-green) !important; }
+html.Theme--black .orange-text, html.Theme--black .orange { color: var(--el-amber) !important; }
+html.Theme--black .red-text, html.Theme--black .red { color: var(--el-red) !important; }
+
+/* ---- pied de page ---- */
+html.Theme--black #footer {
+    font-family: var(--el-mono) !important;
+    background: rgba(3, 3, 3, .95) !important;
+    border-top: 1px solid #1f1f23 !important;
+    font-size: 11.5px !important;
+}
+#el-friend { color: var(--el-red); font-family: var(--el-mono); margin-right: 14px; opacity: .85; }
+
+/* ---- glitch ponctuel (déclenché par custom.js) ---- */
+/* tremblement : le contenu bouge, le pied de page reste fixe */
+html.el-glitching body > *:not(#footer):not(script):not(style) { animation: el-shake var(--el-shake-d, 800ms) steps(1) 1; }
+html.el-glitching div.title { animation: el-glitch .15s steps(2) 5; }
+@keyframes el-shake {
+    0%   { transform: translate(-5px, 0) skewX(-.8deg); }
+    7%   { transform: translate(6px, 1px); }
+    13%  { transform: translate(-3px, -1px) skewX(.6deg); }
+    20%  { transform: none; }
+    34%  { transform: translate(4px, 0); }
+    38%  { transform: translate(-6px, 1px) skewX(-.5deg); }
+    44%  { transform: none; }
+    62%  { transform: translate(-4px, -1px); }
+    66%  { transform: translate(5px, 0) skewX(.7deg); }
+    72%  { transform: translate(-2px, 1px); }
+    78%  { transform: none; }
+    100% { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html.Theme--black *, html.Theme--black *::before, html.Theme--black *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---- en-tête : bannière Eliot générée + nom du serveur à la place du logo Unraid ---- */
+html.Theme--black #header {
+    background: #030304 url("__HEADER__") left center / auto 100% repeat-x !important;
+    border-bottom: 1px solid rgba(255, 30, 60, .55) !important;
+    height: 76px !important; min-height: 76px !important;
+}
+html.Theme--black #header > unraid-header, html.Theme--black #header #UnraidHeader { height: 100% !important; }
+/* fondu au noir : noir plein jusqu'au journal d'Eliot, puis le décor de logs apparaît */
+#el-fade {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(90deg, #030304 0, #030304 var(--el-fade-x, 640px), rgba(3, 3, 4, .55) calc(var(--el-fade-x, 640px) + 260px), transparent calc(var(--el-fade-x, 640px) + 520px));
+}
+html.Theme--black #header > unraid-header { position: relative; z-index: 2; display: block; }
+/* le journal d'Eliot : fait partie du décor, mis à jour à chaque passage du matin */
+.el-blk {
+    position: absolute; top: 50%; transform: translateY(-50%); left: var(--el-syslog-left, 660px); z-index: 3;
+    font-family: var(--el-mono); font-size: 10px; line-height: 1.25; white-space: nowrap; color: #5d5d66;
+    cursor: default; user-select: none; text-shadow: 0 0 6px #000, 0 0 2px #000;
+}
+.el-blk .el-gl { color: #cfcfd4; opacity: .95; }
+.el-blk .el-gl-mut { color: #8a8a92; }
+.el-blk .el-gl-amber { color: #ffb020; }
+.el-blk .el-gl-red { color: #ff1e3c; }
+.el-blk .el-gl-green { color: #3dff8b; }
+.el-blk .l-first { margin-top: 3px; }
+.el-blk > div:not(.el-gl) { opacity: .8; }
+.el-blk .ts { color: #34343a; }
+.el-blk .hn { color: #3e3e45; }
+.el-blk .pr { color: rgba(255, 30, 60, .45); }
+.el-blk .tg { color: #55555c; }
+.el-blk .ms { color: #8a8a92; }
+.el-blk .l-power .ms { color: #b4b4bb; }
+.el-blk .l-warn .ms { color: rgba(255, 176, 32, .75); }
+@media (max-width: 1500px) { .el-blk { display: none; } }
+html.Theme--black #header .unraid-banner-gradient-layer { display: none !important; }
+html.Theme--black #header a.uh-logo > svg,
+html.Theme--black #header a.uh-logo > img { display: none !important; }
+html.Theme--black #header a.uh-logo { align-items: center; text-decoration: none !important; }
+.el-host-wrap { display: inline-flex; align-items: baseline; gap: 10px; font-family: var(--el-mono); white-space: nowrap; }
+.el-host {
+    position: relative; display: inline-block;
+    font-family: var(--el-mono); font-weight: 700; font-size: 28px; line-height: 1; letter-spacing: .5px;
+    color: #f4f4f4;
+    text-shadow: -2px 0 rgba(255, 30, 60, .9), 2px 0 rgba(94, 231, 255, .5);
+}
+.el-host-prompt { font-family: var(--el-mono); font-weight: 700; font-size: 20px; color: #ff1e3c; text-shadow: 0 0 12px rgba(255, 30, 60, .6); }
+.el-host-prompt i { display: inline-block; width: 10px; height: 19px; margin-left: 4px; vertical-align: -2px; background: #ff1e3c; animation: el-blink 1.05s steps(1) infinite; }
+
+
+/* ---- recherche intégrée au prompt ---- */
+#el-prompt { position: relative; }
+#el-search {
+    all: unset; box-sizing: content-box;
+    font-family: var(--el-mono) !important; font-size: 12.5px !important; color: #f2f2f2 !important;
+    width: 1ch; min-width: 1ch; max-width: 26ch; margin-left: 6px; padding: 0 !important;
+    background: transparent !important; border: 0 !important; box-shadow: none !important;
+    caret-color: #ff1e3c; caret-shape: block;
+    transition: width .12s;
+}
+#el-search:focus, #el-search:not(:placeholder-shown) { width: 26ch; }
+#el-search:focus + i, #el-search:not(:placeholder-shown) + i { display: none; }
+#el-prompt .awesomplete { display: inline-block; position: relative; }
+#el-prompt .awesomplete > ul {
+    position: fixed; top: var(--el-sugg-top, 104px); left: var(--el-sugg-left, 20px); z-index: 2147483600; min-width: 340px; max-height: 60vh; overflow: auto;
+    margin: 0; padding: 4px 0; list-style: none;
+    background: #050505 !important; border: 1px solid #ff1e3c !important; border-radius: 2px !important;
+    box-shadow: 0 18px 40px -12px rgba(255, 30, 60, .45) !important;
+}
+#el-prompt .awesomplete > ul[hidden], #el-prompt .awesomplete > ul:empty { display: none; }
+#el-prompt .awesomplete > ul > li {
+    font-family: var(--el-mono); font-size: 12px; color: #c9c9cf; padding: 5px 12px; cursor: pointer; white-space: nowrap;
+}
+#el-prompt .awesomplete > ul > li::before { content: "  "; }
+#el-prompt .awesomplete > ul > li[aria-selected="true"], #el-prompt .awesomplete > ul > li:hover { background: rgba(255, 30, 60, .14); color: #fff; }
+#el-prompt .awesomplete > ul > li[aria-selected="true"]::before { content: "> "; color: #ff1e3c; }
+#el-prompt .awesomplete mark { background: none; color: #ff1e3c; font-weight: 700; }
+#el-prompt .visually-hidden { position: absolute; clip: rect(0 0 0 0); width: 1px; height: 1px; overflow: hidden; }
+html.Theme--black #header { position: relative; }
+
+/* ---- barre de droite : ménage (gardés : terminal, gestionnaire de fichiers, power) ---- */
+html.Theme--black #menu .nav-tile.right .DiskViewerButton,
+html.Theme--black #menu .nav-tile.right .LogoutButton,
+html.Theme--black #menu .nav-tile.right .FeedbackButton,
+html.Theme--black #menu .nav-tile.right .InfoButton,
+html.Theme--black #menu .nav-tile.right .LogButton,
+html.Theme--black #menu .nav-tile.right .HelpButton { display: none !important; }
+#el-logout i { color: var(--el-red); }
+
+/* ---- barre du menu : toute la zone du prompt ouvre la recherche ---- */
+#el-prompt { align-self: stretch; cursor: text; padding: 0 28px 0 8px; min-width: 330px; box-sizing: border-box; transition: background .15s, box-shadow .15s; }
+#el-prompt:hover { background: rgba(255, 30, 60, .06); }
+#el-prompt:focus-within { background: rgba(255, 30, 60, .11); box-shadow: inset 0 -2px 0 #ff1e3c; }
+#el-search, #el-search:focus, #el-search:not(:placeholder-shown) { width: 26ch !important; min-width: 26ch; flex: 1 1 auto; }
+
+/* ---- en-tête : crochets du verdict + rémanence du texte (phosphore) ---- */
+.el-blk .el-gl-v { font-size: 9.5px; letter-spacing: 1px; color: #8a8a92; margin-bottom: 1px; }
+.el-blk .el-gl-v-ok { color: #3dff8b; }
+.el-blk .el-gl-v-attention { color: #ffb020; }
+.el-blk .el-gl-v-alert { color: #ff1e3c; }
+.el-blk .el-gl-v, .el-blk .el-gl { text-shadow: 0 0 7px currentColor, 0 0 2px #000; }
+
+/* ---- bugs qui traînent (réf. écrans CRT de Fallout : séparation des couleurs, vidéo inverse, scintillement, barre de balayage) ---- */
+.el-bug { position: relative; animation: el-bug-t .7s steps(1) var(--el-n, 1); }
+.el-bug::before, .el-bug::after { content: attr(data-el); position: absolute; inset: 0; overflow: hidden; white-space: nowrap; pointer-events: none; }
+.el-bug::before { text-shadow: -2px 0 #ff1e3c; clip-path: inset(0 0 52% 0); animation: el-bug-a .7s steps(1) var(--el-n, 1); }
+.el-bug::after  { text-shadow: 2px 0 #5ee7ff;  clip-path: inset(46% 0 0 0); animation: el-bug-b .7s steps(1) var(--el-n, 1); }
+@keyframes el-bug-t { 0%, 100% { text-shadow: none; } 25% { text-shadow: -2px 0 rgba(255,30,60,.9), 2px 0 rgba(94,231,255,.6); } 60% { text-shadow: 2px 0 rgba(255,30,60,.9), -2px 0 rgba(94,231,255,.6); } }
+@keyframes el-bug-a { 0%, 100% { transform: none; } 15% { transform: translateX(-7px); } 30% { transform: translateX(5px); } 45% { transform: translateX(-3px); } 60% { transform: none; } 75% { transform: translateX(8px); } 85% { transform: none; } }
+@keyframes el-bug-b { 0%, 100% { transform: none; } 20% { transform: translateX(7px); } 35% { transform: translateX(-5px); } 55% { transform: none; } 70% { transform: translateX(-8px); } 85% { transform: none; } }
+#el-roll {
+    position: fixed; left: 0; right: 0; top: -180px; height: 180px; z-index: 2147482990; pointer-events: none;
+    background: linear-gradient(to bottom, transparent 0, rgba(255,30,60,.05) 50%, rgba(255,255,255,.045) 82%, transparent 100%);
+    animation: el-roll 4.6s linear 1 both;
+}
+@keyframes el-roll { from { transform: translateY(0); } to { transform: translateY(calc(100vh + 180px)); } }
+html.el-flicker body > *:not(#footer):not(script):not(style) { animation: el-flicker .7s steps(1) 1; }
+@keyframes el-flicker { 0% { opacity: 1; } 10% { opacity: .8; } 20% { opacity: 1; } 35% { opacity: .9; } 45% { opacity: 1; } 70% { opacity: .86; } 80% { opacity: 1; } }
+
+/* ---- nom du serveur : décalage de lettres permanent (restauré) ---- */
+.el-host::before, .el-host::after { content: attr(data-text); position: absolute; left: 0; top: 0; width: 100%; overflow: hidden; color: #f4f4f4; }
+.el-host::before { text-shadow: -3px 0 #ff1e3c; clip-path: inset(0 0 62% 0); animation: el-slice-a 4.2s infinite steps(1); }
+.el-host::after  { text-shadow: 3px 0 #5ee7ff; clip-path: inset(58% 0 0 0); animation: el-slice-b 5.3s infinite steps(1); }
+@keyframes el-slice-a { 0%, 86%, 100% { transform: none; } 87% { transform: translateX(-5px); } 89% { transform: translateX(4px); } 91% { transform: translateX(-2px); } 93% { transform: none; } }
+@keyframes el-slice-b { 0%, 70%, 100% { transform: none; } 71% { transform: translateX(6px); } 73% { transform: translateX(-3px); } 75% { transform: none; } }
+
+#el-stats .l-first { margin-top: 0; }

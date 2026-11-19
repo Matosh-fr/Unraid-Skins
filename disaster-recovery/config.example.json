@@ -1,0 +1,15 @@
+{
+  "ha_url": "http://homeassistant.local:8123",
+  "ha_token_file": "ha.token",
+  "entities": {
+    "cost_month": "sensor.server_cost_this_month",
+    "energy_month": "sensor.server_energy_this_month",
+    "tempo_today": "sensor.tempo_color_today",
+    "tempo_tomorrow": "sensor.tempo_color_tomorrow",
+    "price": "sensor.tempo_current_price",
+    "cpu_temp": "sensor.server_cpu_temperature",
+    "power": "sensor.server_power",
+    "extra_cost_month": "sensor.second_device_cost_this_month"
+  },
+  "extra_label": "pc gaming"
+}
