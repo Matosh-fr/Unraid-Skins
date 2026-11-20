@@ -1,0 +1,347 @@
+/* ==========================================================================
+   VAULT_ : Unraid skin (Aurora Theme overlay, thèmes clairs White / Azure)
+   Alter ego « lecture seule » d'eliot_ : terminal RobCo / Pip-Boy, phosphore vert.
+   Tout est cloisonné : __LIGHT__ (remplacé par build.py) = html:root:is(.Theme--white, .Theme--azure),
+   classes et identifiants préfixés « vt- ». Rien ici ne s'applique au thème Black.
+   Police : JetBrains Mono (SIL OFL 1.1), embarquée par build.py.
+   ========================================================================== */
+@font-face { font-family: "Vault Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("__FONT400__") format("woff2"); }
+@font-face { font-family: "Vault Mono"; font-weight: 700; font-style: normal; font-display: swap; src: url("__FONT700__") format("woff2"); }
+
+/* ---- palette : phosphore vert sur verre noir ---- */
+__LIGHT__ {
+    color-scheme: dark;
+    --vt-g: #14ff4a;
+    --vt-g2: #2bff88;
+    --vt-g3: #9dffb8;
+    --vt-mid: #12b83c;
+    --vt-dim: #0b7a2c;
+    --vt-deep: #06351a;
+    --vt-glass: #020703;
+    --vt-panel: rgba(3, 14, 6, .94);
+    --vt-amber: #ffc94a;
+    --vt-red: #ff5b4a;
+    --vt-glow: 0 0 2px rgba(20, 255, 74, .55), 0 0 9px rgba(20, 255, 74, .28);
+    --vt-mono: "Vault Mono", "Eliot Mono", "JetBrains Mono", "DejaVu Sans Mono", ui-monospace, monospace;
+
+    --tp-bg: #020703;
+    --tp-elevated: #041008;
+    --tp-subtle: #06160b;
+    --tp-text: #2bff88;
+    --tp-muted: #12b83c;
+    --tp-border: #0b3d1c;
+    --tp-input-border: #0f5a27;
+    --tp-primary: #14ff4a;
+    --tp-primary-ii: #2bff88;
+    --tp-primary-soft: rgba(20, 255, 74, .12);
+    --tp-tab-active: #06240f;
+    --tp-primary-text: #011205;
+    --tp-header-bg: #010401;
+    --tp-header-text: #2bff88;
+    --tp-header-muted: #12b83c;
+    --tp-shadow-sm: 0 0 0 1px rgba(20, 255, 74, .05);
+    --tp-shadow-lg: 0 30px 70px -30px rgba(20, 255, 74, .2);
+    --tp-success-bg: #052a10;
+    --tp-success-text: #14ff4a;
+    --tp-danger: #ff5b4a;
+    --tp-danger-soft: rgba(255, 91, 74, .12);
+    --tp-warn-bg: #2a2105;
+    --tp-warn-text: #ffc94a;
+    --tp-neutral-bg: #06200d;
+    --tp-neutral-text: #7dffa6;
+    --tp-gradient: linear-gradient(135deg, #14ff4a, #0b7a2c);
+    --tp-font-body: var(--vt-mono);
+    --tp-font-heading: var(--vt-mono);
+    --tp-r-sm: 0px;
+    --tp-r-md: 2px;
+    --tp-ring-track: #06351a;
+    --tp-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2314ff4a' stroke-width='2.4' stroke-linecap='square'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    --tp-hsl-surface: 140 70% 3%;
+    --tp-hsl-subtle: 140 60% 5%;
+    --tp-hsl-border: 140 70% 14%;
+    --tp-hsl-input: 140 70% 20%;
+    --tp-hsl-primary: 134 100% 54%;
+    --tp-hsl-primary-text: 135 90% 4%;
+    --tp-hsl-muted: 135 82% 40%;
+    --tp-hsl-text: 147 100% 58%;
+    --brand-orange: #14ff4a;
+    --brand-red: #14ff4a;
+}
+
+/* ---- verre du tube : fond noir-vert, halo, lignes de balayage, vignette, léger flou ---- */
+__LIGHT__ body {
+    background-color: #010401 !important;
+    background-image:
+        radial-gradient(ellipse 120% 90% at 50% 40%, rgba(20, 255, 74, .07) 0, rgba(20, 255, 74, .025) 45%, transparent 75%),
+        repeating-linear-gradient(90deg, rgba(20, 255, 74, .018) 0 1px, transparent 1px 4px) !important;
+    background-attachment: fixed !important;
+    color: var(--vt-g2) !important;
+    font-family: var(--vt-mono) !important;
+    text-shadow: var(--vt-glow);
+}
+__LIGHT__ body::after {
+    content: "";
+    position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
+    background:
+        repeating-linear-gradient(to bottom, rgba(0, 0, 0, .28) 0 1px, transparent 1px 3px),
+        radial-gradient(ellipse at center, transparent 52%, rgba(0, 0, 0, .62) 100%);
+    animation: vt-hum 9s linear infinite;
+}
+/* bande de tension qui remonte lentement (secteur 50 Hz mal filtré) */
+__LIGHT__ body::before {
+    content: "";
+    position: fixed; left: 0; right: 0; top: 0; height: 26vh; z-index: 2147482995; pointer-events: none;
+    background: linear-gradient(to bottom, transparent, rgba(20, 255, 74, .028) 50%, transparent);
+    animation: vt-band 11s linear infinite;
+}
+@keyframes vt-band { from { transform: translateY(100vh); } to { transform: translateY(-26vh); } }
+@keyframes vt-hum { 0%, 100% { opacity: 1; } 50% { opacity: .9; } 51% { opacity: 1; } 77% { opacity: .95; } }
+__LIGHT__ ::selection { background: var(--vt-g); color: #011205; text-shadow: none; }
+__LIGHT__ * { scrollbar-color: var(--vt-dim) #010401; scrollbar-width: thin; }
+__LIGHT__ ::-webkit-scrollbar { width: 8px; height: 8px; background: #010401; }
+__LIGHT__ ::-webkit-scrollbar-thumb { background: var(--vt-dim); }
+__LIGHT__ ::-webkit-scrollbar-thumb:hover { background: var(--vt-g); }
+__LIGHT__ a { color: var(--vt-g) !important; }
+__LIGHT__ a:hover { color: var(--vt-g3) !important; }
+
+/* ---- texte : tout en phosphore, police mono ---- */
+/* police posée sur les conteneurs seulement (héritée) : les icônes (Font Awesome, icon-*) gardent leur police */
+__LIGHT__ #displaybox, __LIGHT__ .content, __LIGHT__ table, __LIGHT__ td, __LIGHT__ th, __LIGHT__ dl, __LIGHT__ dt, __LIGHT__ dd,
+__LIGHT__ p, __LIGHT__ label, __LIGHT__ div.title, __LIGHT__ .tile, __LIGHT__ blockquote {
+    font-family: var(--vt-mono) !important;
+}
+__LIGHT__ table.dashboard tbody { border-radius: 0 !important; }
+__LIGHT__ #displaybox, __LIGHT__ table, __LIGHT__ td, __LIGHT__ dt, __LIGHT__ dd, __LIGHT__ p, __LIGHT__ label { color: var(--vt-g2); }
+__LIGHT__ blockquote, __LIGHT__ .inline_help { background: rgba(3, 18, 7, .9) !important; border-color: var(--vt-dim) !important; color: var(--vt-g3) !important; }
+
+/* ---- barre de navigation : onglets RobCo ---- */
+__LIGHT__ #menu {
+    background: rgba(1, 6, 2, .94) !important;
+    border-bottom: 1px solid var(--vt-g) !important;
+    box-shadow: 0 1px 0 rgba(20, 255, 74, .25), 0 12px 30px -18px rgba(20, 255, 74, .45) !important;
+}
+__LIGHT__ #menu .nav-item a, __LIGHT__ #menu .nav-user, __LIGHT__ #menu .nav-user a {
+    font-family: var(--vt-mono) !important; font-size: 12.5px !important; letter-spacing: .8px;
+    text-transform: uppercase; border-radius: 0 !important;
+}
+__LIGHT__ #menu .nav-item a { color: var(--vt-mid) !important; transition: color .12s, background .12s; }
+__LIGHT__ #menu .nav-item a:hover { color: var(--vt-g) !important; background: rgba(20, 255, 74, .07) !important; text-shadow: var(--vt-glow); }
+__LIGHT__ #menu .nav-item.active a {
+    color: #011205 !important; background: var(--vt-g) !important; text-shadow: none;
+    box-shadow: 0 0 16px -2px rgba(20, 255, 74, .7) !important; border: 0 !important;
+}
+__LIGHT__ #menu .nav-item.active a::before { content: "\25B6  "; font-size: 9px; vertical-align: 1px; }
+__LIGHT__ #menu .nav-item i, __LIGHT__ #menu .nav-user i, __LIGHT__ #menu [class^="icon-"] { color: var(--vt-g) !important; }
+
+/* ---- titres de section : invite de commande ---- */
+__LIGHT__ div.title, __LIGHT__ .title {
+    font-family: var(--vt-mono) !important; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--vt-g) !important; background: rgba(4, 22, 9, .9) !important;
+    border-bottom: 1px solid var(--vt-dim) !important; border-radius: 0 !important;
+}
+__LIGHT__ div.title > span.left:not(.zfs_bar_text)::before {
+    content: "> "; color: var(--vt-g); font-weight: 700; margin-right: 2px;
+}
+__LIGHT__ div.title > span > i, __LIGHT__ div.title > i, __LIGHT__ div.title .fa, __LIGHT__ div.title [class^="icon-"] { display: none !important; }
+
+/* ---- panneaux, cartes, tuiles : écran du Pip-Boy ---- */
+__LIGHT__ table, __LIGHT__ .tp-server-card, __LIGHT__ #displaybox { background-color: var(--vt-panel) !important; }
+__LIGHT__ .tp-server-card, __LIGHT__ div.Panel, __LIGHT__ table.dashboard, __LIGHT__ .tile, __LIGHT__ .tft-update-card,
+__LIGHT__ .tile-system-memory-charts.tp-rings > span {
+    background: var(--vt-panel) !important;
+    border: 1px solid #0b3d1c !important; border-radius: 0 !important;
+    box-shadow: inset 0 0 24px -10px rgba(20, 255, 74, .25) !important;
+}
+__LIGHT__ div.Panel { transition: border-color .12s, box-shadow .12s; }
+__LIGHT__ div.Panel:hover { border-color: var(--vt-g) !important; box-shadow: 0 0 0 1px rgba(20, 255, 74, .35), 0 0 26px -8px rgba(20, 255, 74, .6) !important; }
+__LIGHT__ div.Panel .PanelText, __LIGHT__ div.Panel span { font-family: var(--vt-mono) !important; font-size: 12px !important; color: var(--vt-g2) !important; text-transform: uppercase; }
+__LIGHT__ div.Panel:hover .PanelText { color: var(--vt-g) !important; animation: vt-jitter .3s steps(2) 1; }
+/* icônes : monochrome vert, comme sur l'écran du Pip-Boy */
+__LIGHT__ div.Panel img, __LIGHT__ div.Panel i, __LIGHT__ #displaybox img:not([src*="data:"]), __LIGHT__ .tile img {
+    filter: grayscale(1) sepia(1) hue-rotate(72deg) saturate(5) brightness(.95) drop-shadow(0 0 3px rgba(20, 255, 74, .45));
+}
+__LIGHT__ div.Panel i, __LIGHT__ #displaybox i.fa, __LIGHT__ #displaybox [class^="icon-"] { color: var(--vt-g) !important; }
+
+/* ---- tableaux ---- */
+__LIGHT__ table th, __LIGHT__ table thead td {
+    font-family: var(--vt-mono) !important; text-transform: uppercase; letter-spacing: .8px;
+    color: var(--vt-g) !important; font-weight: 700 !important; background: rgba(6, 34, 13, .9) !important;
+    border-bottom: 1px solid var(--vt-dim) !important;
+}
+__LIGHT__ table td { font-variant-numeric: tabular-nums; border-color: #072c13 !important; }
+__LIGHT__ table tbody tr:nth-child(even) td { background: rgba(20, 255, 74, .02) !important; }
+__LIGHT__ table tbody tr:hover td { background: rgba(20, 255, 74, .08) !important; }
+
+/* ---- boutons : touches de terminal (inversion au survol) ---- */
+__LIGHT__ input[type=button], __LIGHT__ input[type=submit], __LIGHT__ input[type=reset],
+__LIGHT__ button:not(.vt-keep), __LIGHT__ a.button {
+    font-family: var(--vt-mono) !important; text-transform: uppercase !important; letter-spacing: .8px;
+    background: transparent !important; border: 1px solid var(--vt-g) !important; color: var(--vt-g) !important;
+    border-radius: 0 !important; box-shadow: none !important; text-shadow: var(--vt-glow);
+    transition: background .1s, color .1s, box-shadow .1s;
+}
+__LIGHT__ input[type=button]:hover, __LIGHT__ input[type=submit]:hover, __LIGHT__ input[type=reset]:hover,
+__LIGHT__ button:not(.vt-keep):hover, __LIGHT__ a.button:hover {
+    background: var(--vt-g) !important; color: #011205 !important; text-shadow: none;
+    box-shadow: 0 0 18px -3px rgba(20, 255, 74, .85) !important;
+}
+__LIGHT__ input[type=button]:disabled, __LIGHT__ input[type=submit]:disabled, __LIGHT__ button:disabled {
+    border-color: var(--vt-dim) !important; color: var(--vt-dim) !important; background: transparent !important; box-shadow: none !important;
+}
+__LIGHT__ input[type=text], __LIGHT__ input[type=password], __LIGHT__ input[type=number], __LIGHT__ input[type=email],
+__LIGHT__ input[type=search], __LIGHT__ input[type=url], __LIGHT__ select, __LIGHT__ textarea {
+    font-family: var(--vt-mono) !important; background: #010401 !important; border: 1px solid #0f5a27 !important;
+    color: var(--vt-g2) !important; border-radius: 0 !important; caret-color: var(--vt-g);
+}
+__LIGHT__ select option { background: #010401; color: var(--vt-g2); }
+__LIGHT__ input:focus, __LIGHT__ select:focus, __LIGHT__ textarea:focus {
+    outline: none !important; border-color: var(--vt-g) !important;
+    box-shadow: 0 0 0 1px var(--vt-g), 0 0 16px -6px rgba(20, 255, 74, .9) !important;
+}
+__LIGHT__ input::placeholder, __LIGHT__ textarea::placeholder { color: var(--vt-dim) !important; }
+
+/* ---- jauges (CPU, RAM, disques) : blocs ▮▮▮ ---- */
+__LIGHT__ .usage-bar > span, __LIGHT__ .usage-disk > span, __LIGHT__ .usage-bar span.load, __LIGHT__ div[class*="usage"] > span {
+    background: repeating-linear-gradient(90deg, var(--vt-g) 0 7px, transparent 7px 9px) !important;
+    box-shadow: 0 0 10px -2px rgba(20, 255, 74, .7);
+}
+__LIGHT__ .usage-bar, __LIGHT__ .usage-disk { background: #031a09 !important; border-radius: 0 !important; }
+
+/* ---- pastilles et couleurs d'état ---- */
+__LIGHT__ .tp-pill { font-family: var(--vt-mono) !important; border-radius: 0 !important; text-transform: uppercase; }
+__LIGHT__ .tp-pill.tp-good { color: var(--vt-g) !important; background: rgba(20, 255, 74, .08) !important; border: 1px solid rgba(20, 255, 74, .4) !important; }
+__LIGHT__ .green-text, __LIGHT__ .green { color: var(--vt-g) !important; }
+__LIGHT__ .orange-text, __LIGHT__ .orange { color: var(--vt-amber) !important; }
+__LIGHT__ .red-text, __LIGHT__ .red { color: var(--vt-red) !important; }
+
+/* ---- fenêtres (SweetAlert, menus déroulants) ---- */
+__LIGHT__ .sweet-alert, __LIGHT__ ul.dropdown-context, __LIGHT__ .dropdown-menu {
+    background: #010601 !important; border: 1px solid var(--vt-g) !important; border-radius: 0 !important;
+    color: var(--vt-g2) !important; box-shadow: 0 0 30px -8px rgba(20, 255, 74, .5) !important;
+}
+__LIGHT__ .sweet-alert h2, __LIGHT__ .sweet-alert p { color: var(--vt-g2) !important; font-family: var(--vt-mono) !important; }
+__LIGHT__ ul.dropdown-context a { color: var(--vt-g2) !important; font-family: var(--vt-mono) !important; }
+__LIGHT__ ul.dropdown-context a:hover { background: var(--vt-g) !important; color: #011205 !important; }
+
+/* ---- pied de page ---- */
+__LIGHT__ #footer {
+    font-family: var(--vt-mono) !important; background: rgba(1, 5, 2, .96) !important;
+    border-top: 1px solid var(--vt-dim) !important; font-size: 11.5px !important; color: var(--vt-mid) !important;
+}
+#vt-friend { color: var(--vt-g); font-family: var(--vt-mono); margin-right: 14px; opacity: .8; text-transform: uppercase; letter-spacing: 1px; }
+
+/* ==========================================================================
+   EN-TÊTE : vault_ >_  + prompt caché (même mécanique qu'eliot_)
+   ========================================================================== */
+__LIGHT__ #header {
+    position: relative;
+    background:
+        linear-gradient(90deg, #010401 0, #010401 38%, rgba(1, 4, 1, .6) 70%, rgba(1, 4, 1, .92) 100%),
+        repeating-linear-gradient(to bottom, rgba(20, 255, 74, .05) 0 1px, transparent 1px 12px),
+        radial-gradient(ellipse 40% 140% at 72% 50%, rgba(20, 255, 74, .1), transparent 70%),
+        #010401 !important;
+    border-bottom: 1px solid rgba(20, 255, 74, .55) !important;
+    height: 76px !important; min-height: 76px !important;
+}
+__LIGHT__ #header > unraid-header, __LIGHT__ #header #UnraidHeader { height: 100% !important; }
+__LIGHT__ #header > unraid-header { position: relative; z-index: 2; display: block; }
+__LIGHT__ #header .unraid-banner-gradient-layer { display: none !important; }
+__LIGHT__ #header a.uh-logo > svg, __LIGHT__ #header a.uh-logo > img { display: none !important; }
+__LIGHT__ #header a.uh-logo { align-items: center; text-decoration: none !important; }
+__LIGHT__ #header, __LIGHT__ #header * { color: var(--vt-g2); }
+.vt-host-wrap { display: inline-flex; align-items: baseline; gap: 10px; font-family: var(--vt-mono); white-space: nowrap; }
+.vt-host {
+    position: relative; display: inline-block;
+    font-family: var(--vt-mono); font-weight: 700; font-size: 28px; line-height: 1; letter-spacing: .5px;
+    color: var(--vt-g) !important;
+    text-shadow: 0 0 2px rgba(20, 255, 74, .9), 0 0 12px rgba(20, 255, 74, .55), 0 0 28px rgba(20, 255, 74, .25);
+    filter: blur(.25px);
+}
+/* rémanence : un double très pâle, décalé d'un pixel, qui scintille */
+.vt-host::after {
+    content: attr(data-text); position: absolute; left: 1px; top: 1px; color: var(--vt-g);
+    opacity: .18; filter: blur(1.4px); animation: vt-ghost 6.5s infinite steps(1); pointer-events: none;
+}
+@keyframes vt-ghost { 0%, 90%, 100% { transform: none; opacity: .18; } 91% { transform: translate(-4px, -2px); opacity: .45; } 93% { transform: translate(3px, 1px); opacity: .3; } 95% { transform: none; } }
+.vt-host-prompt { position: relative; font-family: var(--vt-mono); font-weight: 700; font-size: 20px; color: var(--vt-g) !important; text-shadow: 0 0 12px rgba(20, 255, 74, .6); }
+.vt-host-prompt i { display: inline-block; width: 11px; height: 19px; margin-left: 4px; vertical-align: -2px; background: var(--vt-g); box-shadow: 0 0 10px rgba(20, 255, 74, .8); animation: vt-blink 1.05s steps(1) infinite; }
+@keyframes vt-blink { 50% { opacity: 0; } }
+#vt-ask {
+    all: unset; position: absolute; left: 0; top: -6px; height: 32px; width: min(44vw, 560px); z-index: 6; cursor: text;
+    color: transparent !important; caret-color: transparent !important; background: transparent !important;
+    font-family: var(--vt-mono) !important; font-size: 18px !important;
+    border: 0 !important; outline: 0 !important; box-shadow: none !important; -webkit-appearance: none !important; appearance: none !important;
+}
+#vt-ask:focus, #vt-ask:focus-visible, #vt-ask:hover { border: 0 !important; outline: 0 !important; box-shadow: none !important; background: transparent !important; }
+.vt-ask-line { position: absolute; left: 30px; top: 1px; white-space: pre; pointer-events: none; display: none;
+    font-family: var(--vt-mono); font-size: 18px; font-weight: 700; color: var(--vt-g) !important; text-shadow: 0 0 10px rgba(20, 255, 74, .6);
+    max-width: min(42vw, 530px); overflow: hidden; text-transform: uppercase; }
+.vt-ask-caret { display: inline-block; width: 11px; height: 18px; margin-left: 2px; vertical-align: -2px; background: var(--vt-g); animation: vt-blink 1.05s steps(1) infinite; }
+.vt-asking .vt-ask-line { display: inline-block; }
+.vt-asking .vt-host-prompt > i { visibility: hidden; }
+.vt-asking .vt-host { text-shadow: 0 0 3px #14ff4a, 0 0 18px rgba(20, 255, 74, .8), 0 0 36px rgba(20, 255, 74, .35); }
+/* pendant la frappe : les blocs voisins s'estompent */
+#vt-term, __LIGHT__ .uh-version, __LIGHT__ #header .uh-logo-block > *:not(a) { transition: opacity .25s ease, filter .25s ease; }
+html.vt-ask-on #vt-term, html.vt-ask-on .uh-version, html.vt-ask-on #header .uh-logo-block > *:not(a) { opacity: 0 !important; filter: blur(2px); pointer-events: none; }
+
+/* bloc TERMLINK de l'en-tête (verdict et lignes clés du rapport d'Eliot, en lecture seule) */
+#vt-term {
+    position: absolute; top: 50%; transform: translateY(-50%); left: 640px; z-index: 3;
+    font-family: var(--vt-mono); font-size: 10px; line-height: 1.3; white-space: nowrap; color: var(--vt-mid);
+    cursor: default; user-select: none; text-transform: uppercase; letter-spacing: .6px;
+}
+#vt-term .vt-t-h { color: var(--vt-dim); }
+#vt-term .vt-t-v { color: var(--vt-g); text-shadow: 0 0 6px rgba(20, 255, 74, .6); }
+#vt-term .vt-t-v-attention, #vt-term .vt-c-amber { color: var(--vt-amber); text-shadow: 0 0 6px rgba(255, 201, 74, .5); }
+#vt-term .vt-t-v-alert, #vt-term .vt-c-red { color: var(--vt-red); text-shadow: 0 0 6px rgba(255, 91, 74, .5); }
+#vt-term .vt-c-mut { color: var(--vt-dim); }
+#vt-term .vt-c-green, #vt-term .vt-c-txt { color: var(--vt-g2); }
+@media (max-width: 1400px) { #vt-term { display: none; } }
+
+/* ==========================================================================
+   BUGS « FALLOUT » (déclenchés par custom.js) : préfixe vt-
+   ========================================================================== */
+/* ligne qui saute */
+.vt-jump { position: relative; animation: vt-jump .42s steps(1) 1; }
+@keyframes vt-jump { 0% { top: -3px; } 18% { top: 2px; } 36% { top: -1px; left: 2px; } 54% { top: 0; left: -1px; } 72% { top: 1px; left: 0; } 100% { top: 0; } }
+@keyframes vt-jitter { 0% { transform: translateX(1px); text-shadow: 0 0 8px #14ff4a; } 50% { transform: translateX(-1px); } 100% { transform: none; } }
+/* vidéo inverse et surexposition */
+.vt-inv { background: var(--vt-g) !important; color: #011205 !important; text-shadow: none !important; }
+.vt-burn { color: #eaffef !important; text-shadow: 0 0 4px #fff, 0 0 14px #14ff4a, 0 0 28px #14ff4a !important; }
+/* l'image entière décroche (perte de synchro verticale) */
+html.vt-vhold body > *:not(#footer):not(script):not(style):not(#vt-boot) { animation: vt-vhold var(--vt-d, 600ms) steps(1) 1; }
+@keyframes vt-vhold {
+    0% { transform: translateY(-9px); } 8% { transform: translateY(6px) skewX(.4deg); } 16% { transform: none; }
+    30% { transform: translateY(-3px); } 34% { transform: translateY(12px); filter: brightness(1.35); } 40% { transform: none; filter: none; }
+    62% { transform: translateY(-5px) skewX(-.5deg); } 70% { transform: translateY(2px); } 78%, 100% { transform: none; }
+}
+html.vt-flicker body > *:not(#footer):not(script):not(style) { animation: vt-flicker .7s steps(1) 1; }
+@keyframes vt-flicker { 0% { opacity: 1; } 10% { opacity: .75; } 20% { opacity: 1; } 35% { opacity: .88; } 45% { opacity: 1; } 70% { opacity: .82; } 80% { opacity: 1; } }
+#vt-roll {
+    position: fixed; left: 0; right: 0; top: -160px; height: 160px; z-index: 2147482990; pointer-events: none;
+    background: linear-gradient(to bottom, transparent 0, rgba(20, 255, 74, .07) 55%, rgba(200, 255, 210, .06) 85%, transparent 100%);
+    animation: vt-roll 4.2s linear 1 both;
+}
+@keyframes vt-roll { from { transform: translateY(0); } to { transform: translateY(calc(100vh + 160px)); } }
+/* petit encart « VAULT-TEC » de chargement */
+#vt-load {
+    position: fixed; left: 18px; bottom: 46px; z-index: 2147482998; pointer-events: none;
+    font: 700 11px/1.5 var(--vt-mono); color: var(--vt-g); letter-spacing: 1px; text-transform: uppercase;
+    background: rgba(1, 6, 2, .94); border: 1px solid var(--vt-g); padding: 6px 10px 7px;
+    box-shadow: 0 0 24px -6px rgba(20, 255, 74, .7); text-shadow: var(--vt-glow);
+}
+#vt-load b { font-weight: 700; letter-spacing: 0; }
+/* séquence de démarrage RobCo (une fois par session, ne bloque jamais les clics) */
+#vt-boot {
+    position: fixed; inset: 0; z-index: 2147482999; pointer-events: none;
+    background: rgba(1, 4, 1, .93); padding: 9vh 9vw;
+    font: 400 15px/1.55 var(--vt-mono); color: var(--vt-g); text-transform: uppercase; letter-spacing: 1px;
+    text-shadow: 0 0 2px rgba(20, 255, 74, .9), 0 0 12px rgba(20, 255, 74, .45); white-space: pre;
+    transition: opacity .45s ease;
+}
+#vt-boot.vt-out { opacity: 0; }
+#vt-boot i { display: inline-block; width: 10px; height: 16px; vertical-align: -2px; background: var(--vt-g); animation: vt-blink .8s steps(1) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+    __LIGHT__ *, __LIGHT__ *::before, __LIGHT__ *::after { animation: none !important; transition: none !important; }
+}
